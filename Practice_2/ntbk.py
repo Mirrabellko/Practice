@@ -24,12 +24,20 @@ def set_noteid(maincatalog: list):
     id = len(maincatalog) + 1
     return id
 
+
 def add_new_to_catalog():
     new_note = entry1.get()
     add = [set_noteid(MainCatalog), new_note]
     MainCatalog.append(add)
     print(len(MainCatalog))
     auto_save(MainCatalog)
+    show_catalog_for_lable(MainCatalog)
+
+def show_catalog_for_lable(maincatalog: list):
+    result = '''Каталог:\n '''
+    for i in maincatalog:
+        result = result + str(i[0]) + ':'+ str(i[1]) + '\n'
+    label3.config(text=result)
 
 
 root = Tk()
@@ -57,13 +65,14 @@ button_save.grid(column=8,row=1, padx=70)
 button_open = Button(frame1, text='Открыть', command=btn_click, width=10)
 button_open.grid(column=8,row=2, padx=70)
 
-button_delete = Button(frame1, text='Удалить', command=btn_click, width=10)
+button_delete = Button(frame1, text='Удалить', command=btn_click, width=10, anchor='n')
 button_delete.grid(column=8,row=3, padx=70)
 
-button_exit = Button(frame1, text='Выход', command=btn_exit, width=10)
+button_exit = Button(frame1, text='Выход', command=btn_exit, width=10, anchor='n')
 button_exit.grid(column=8,row=6, padx=70)
 
-label3 = Label(frame1, text='Каталог:')
+label3 = Label(frame1, text=f'Каталог:')
 label3.grid(column=0, row=3, padx=10)
+
 
 root.mainloop()
