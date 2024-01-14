@@ -1,78 +1,74 @@
 from tkinter import *
+from tkinter import filedialog
 
-MainCatalog = []
+class Notebook:
+    def __init__(self, root):
+        self.root = root
+        self.root.title('Notebook')
+        self.root.geometry('600x350')
+        self.root.iconbitmap('icon.ico')
+        self.root.resizable(width=False, height=False)
+        self.frame = self.add_frame(root)
+        self.btn_frame = self.add_frame(root)
+        self.textbox = self.add_textbox(root)
 
-def btn_click():
-    print('Button click!')
+    def add_frame(self, root):
+        frame = Frame(root)
+        frame.pack()
+        return frame
 
-def btn_exit():
-    exit()
-
-def auto_save(maincatalog: list):
-    new_txt = ''
-    for i in maincatalog:
-        new_txt = str(i[0]) + ',' + str(i[1]) + '\n'
-    with open('note_catalog.txt', 'a') as file:
-        file.write(new_txt)
-    print('Catalog was saved')
-
-
-def btn_load():
-    pass
-
-def set_noteid(maincatalog: list):
-    id = len(maincatalog) + 1
-    return id
+    def add_button(self, name: str, btn_command, x: int, y: int):
+        btn = Button(self.btn_frame, text=name, command=btn_command, width=20)
+        btn.grid(row=x, column=y)
 
 
-def add_new_to_catalog():
-    new_note = entry1.get()
-    add = [set_noteid(MainCatalog), new_note]
-    MainCatalog.append(add)
-    print(len(MainCatalog))
-    auto_save(MainCatalog)
-    show_catalog_for_lable(MainCatalog)
-
-def show_catalog_for_lable(maincatalog: list):
-    result = '''Каталог:\n '''
-    for i in maincatalog:
-        result = result + str(i[0]) + ':'+ str(i[1]) + '\n'
-    label3.config(text=result)
+    def add_textbox(self, root):
+        #frame = self.add_frame(root)
+        txtbox = Text(self.frame, height=20, width=60)
+        scroll = Scrollbar(self.frame)
+        scroll.pack(side=RIGHT, fill=Y)
+        txtbox.pack(side=LEFT, fill=Y)
+        scroll.config(command=txtbox.yview)
+        txtbox.config(yscrollcommand=scroll.set)
+        txtbox.pack()
+        return txtbox
 
 
-root = Tk()
+    def add_menu(self, root):
+        self.btn_frame.pack(side=LEFT)
+        bnt_new = self.add_button(name='New', btn_command=self.new_file, x=0, y=0)
+        btn_save = self.add_button(name='Save', btn_command=self.save_file, x=0, y=1)
+        btn_open = self.add_button(name='Open', btn_command=self.open_file, x=0, y=2)
+        btn_exit = self.add_button(name='Exit', btn_command=exit, x=0, y=3)
 
-root.title('Notebook')
-root.geometry('300x200')
-root.iconbitmap('icon.ico')
-root.resizable(width=False, height=False)
-
-frame1 = Frame(root)
-frame1.grid()
-
-label1 = Label(frame1, text='Введите заметку:', pady=10)
-label1.grid(column=0, row=0)
-
-entry1 = Entry(frame1, width=20)
-entry1.grid(column=0, row=1, padx=10)
-
-label2 = Label(frame1, text='Меню')
-label2.grid(column=8,row=0, padx=80)
-
-button_save = Button(frame1, text='Сохранить', command=add_new_to_catalog, width=10)
-button_save.grid(column=8,row=1, padx=70)
-
-button_open = Button(frame1, text='Открыть', command=btn_click, width=10)
-button_open.grid(column=8,row=2, padx=70)
-
-button_delete = Button(frame1, text='Удалить', command=btn_click, width=10, anchor='n')
-button_delete.grid(column=8,row=3, padx=70)
-
-button_exit = Button(frame1, text='Выход', command=btn_exit, width=10, anchor='n')
-button_exit.grid(column=8,row=6, padx=70)
-
-label3 = Label(frame1, text=f'Каталог:')
-label3.grid(column=0, row=3, padx=10)
+    def new_file(self):
+        self.textbox.delete('1.0', END)
 
 
-root.mainloop()
+    def save_file(self):
+        fileName = filedialog.asksaveasfilename(filetypes=[("Text Files", "*.txt")])
+        data = self.textbox.get(1.0, "end-1c")
+        print(fileName)
+        fobj = open(fileName, "w")
+        fobj.write(data)
+        fobj.close()
+
+    def open_file(self):
+        self.textbox.delete('1.0', END)
+        fileName = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
+        print(fileName)
+        fobj = open(fileName, "r")
+        data = fobj.readlines()
+        fobj.close()
+        self.textbox.insert(END, data)
+
+
+def start():
+    root = Tk()
+    ntbk = Notebook(root)
+    ntbk.add_menu(root)
+    root.mainloop()
+
+
+if __name__ == '__main__':
+    start()
