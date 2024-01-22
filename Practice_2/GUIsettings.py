@@ -1,6 +1,10 @@
 import system_settings as sysset
 from tkinter import *
 
+"""
+Класс пользовательского интерфейса. 
+"""
+
 
 class MainWindow(Frame):
     def __init__(self, root):
@@ -40,6 +44,7 @@ class MainWindow(Frame):
         btn_save = self.__add_button(btn_frame, name='Save', btn_command=notebook.save_file, x=0, y=1)
         btn_open = self.__add_button(btn_frame, name='Open', btn_command=notebook.open_file, x=0, y=2)
         btn_exit = self.__add_button(btn_frame, name='Exit', btn_command=exit, x=0, y=3)
+
 
 def start():
     root = Tk()

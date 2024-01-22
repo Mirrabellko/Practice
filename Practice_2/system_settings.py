@@ -1,7 +1,11 @@
-import GUIsettings as GUI
 from tkinter import *
 from tkinter import filedialog
 import system_adapter as sysad
+
+"""
+Класс основной логики, реализованы функции создания нового файла, сохранения файла
+ и открытия файла из каталога
+"""
 
 
 class Notebook:

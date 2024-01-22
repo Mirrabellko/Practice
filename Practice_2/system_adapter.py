@@ -1,6 +1,12 @@
 import tkinter
 from tkinter import messagebox
 
+"""
+Класс системного помощника, реализованы методы открытия файлов, сохранения файлов,
+и вывод информационного окна
+"""
+
+
 class Handler:
 
     @staticmethod
