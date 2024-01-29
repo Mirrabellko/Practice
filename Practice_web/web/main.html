@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <title>Would you like to practice English?</title>
+    <!--<script src="eel.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>-->
+    <link rel="stylesheet" href="css/style.css" >
+    <link rel="icon" href="img/icon.png">
+    <script src="eel.js"></script>
+    
+</head>
+<body class="main">
+    
+    <header class="header">
+        <div>
+            <p class="header_1">Would you like to practice English? </p>
+            <p class="header_2">Let's join us!</p>
+        </div>
+    </header>
+    
+        <div class="new_words_1">
+            <img class="image_1" src="img/img_learn.jpg" width="200" height="100" alt="">
+            <p class="new_words_2">At first we will learn some new words:</p>
+        
+        <ul class="new_words_3">
+            <li>Wood   —— Лес</li>
+            <li>Valley —— Долина</li>
+            <li>Hill —— Холм</li>
+            <li>Huge —— Огромный</li>
+            <li>Tree —— Дерево</li>
+            <li>There was —— Там был...</li>
+        </ul>
+        </div>
+        <div>
+            <p class="example_1">Example: <br></p>
+            <p class="example_2">On a hill above the valley there was a wood. <br> <br>
+            In the wood there was a huge tree.
+            </p>
+        </div>
+        <div class="translate_1">
+            <p>Now you should to make sentences with new words!</p>
+        </div>
+        <div>
+            <p class="translate_2">Let's translate next sentences:</p>
+            
+            <ol class="translate_3">
+                <li>Там был лес раньше.</li> <br> <input tabindex="1" type="text" class="answer" id="answer1" placeholder="Input your answer">
+                <li>Это была огромная долина.</li> <br> <input tabindex="2" type="text" class="answer" id="answer2" placeholder="Input your answer">
+                <li>Там не было холма.</li> <br> <input tabindex="3" type="text" class="answer" id="answer3" placeholder="Input your answer">
+            </ol>
+            <div class="btn">
+                <button tabindex="4" type="submit" class="btn1" id="btn1">Check!</button>
+                <button tabindex="5" type="reset" class="btn2" id="btn2">Clear</button>
+            </div>
+        </div>
+        <div>
+            <p class="translate_answers_1">Let's check your answers!</p>
+            <ol class="translate_answers_2">
+                <li>Result: <textarea name="res1" id="res1"></textarea></li>
+                <li>Result: <textarea name="res2" id="res2"></textarea></li>
+                <li>Result: <textarea name="res3" id="res3"></textarea></li>
+            </ol>
+        </div>
+        <!--<script>
+            let btn = document.querySelector("#btn1");
+            btn.addEventListener("click", sendData);
+
+            async function sendData() {
+                let answer1 = document.querySelector("#answer1").value;
+
+                await eel.check(answer1);
+            }
+        </script>-->
+</body>
+</html>
